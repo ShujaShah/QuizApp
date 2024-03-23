@@ -4,7 +4,7 @@ function Header() {
   }
   return (
     <header className="app-header" onClick={handleClick}>
-      <img src="quiz-logo.png" alt="logo" />
+      <img className="header-logo" src="quiz-logo.png" alt="logo" />
       <h1>Take Quiz</h1>
     </header>
   );
