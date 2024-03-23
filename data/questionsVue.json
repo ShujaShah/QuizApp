@@ -1,0 +1,89 @@
+{
+  "questions": [
+    {
+      "question": "Which is the most popular JavaScript framework for building interactive web interfaces?",
+      "options": ["React", "Angular", "Vue", "Ember"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What is the main feature of Vue.js that makes it stand out among other frameworks?",
+      "options": [
+        "Virtual DOM",
+        "Two-way data binding",
+        "Reactivity",
+        "Component-based architecture"
+      ],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which symbol is used for data binding in Vue.js?",
+      "options": ["{{ }}", "[ ]", "( )", "{ }"],
+      "correctOption": 0,
+      "points": 10
+    },
+    {
+      "question": "What does the 'v-bind' directive do in Vue.js?",
+      "options": [
+        "Binds a JavaScript function to an event",
+        "Binds an HTML attribute to a JavaScript expression",
+        "Binds a component property to a parent component",
+        "Binds a variable to a template"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of the 'v-model' directive in Vue.js?",
+      "options": [
+        "To render a list of items",
+        "To bind form input values to data properties",
+        "To define a computed property",
+        "To loop through an array"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is the Vue.js CLI command to create a new Vue project?",
+      "options": ["vue new", "vue init", "vue create", "vue start"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What is the default template syntax used in Vue.js?",
+      "options": ["JSX", "Pug", "Handlebars", "HTML-based templates"],
+      "correctOption": 3,
+      "points": 10
+    },
+    {
+      "question": "Which lifecycle hook is called after a Vue instance has been destroyed?",
+      "options": [
+        "beforeDestroy",
+        "destroyed",
+        "afterDestroy",
+        "destroyInstance"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which Vue.js feature allows us to reuse and compose components?",
+      "options": ["Props", "Slots", "Mixins", "Directives"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "How do you conditionally render content in Vue.js?",
+      "options": [
+        "Using v-if directive",
+        "Using v-for directive",
+        "Using v-else directive",
+        "Using v-switch directive"
+      ],
+      "correctOption": 0,
+      "points": 10
+    }
+  ]
+}

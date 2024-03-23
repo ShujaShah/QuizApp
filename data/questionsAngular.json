@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "question": "Which is the most popular JavaScript framework for building Single Page Applications (SPAs)?",
+      "options": ["Angular", "React", "Vue", "Ember"],
+      "correctOption": 0,
+      "points": 10
+    },
+    {
+      "question": "What is the main building block of an Angular application?",
+      "options": ["Modules", "Components", "Directives", "Services"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "How do you create a new Angular project using Angular CLI?",
+      "options": ["ng create", "ng new", "ng generate", "ng init"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of NgModule in Angular?",
+      "options": [
+        "To define application routes",
+        "To declare and configure components, directives, pipes, and services",
+        "To handle HTTP requests",
+        "To provide global CSS styles"
+      ],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of @Component decorator in Angular?",
+      "options": [
+        "To define a module",
+        "To define a service",
+        "To define a component",
+        "To define a directive"
+      ],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "Which of the following is not a valid data binding syntax in Angular?",
+      "options": ["{{ }}", "[ ]", "( )", "{ }"],
+      "correctOption": 3,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of Dependency Injection (DI) in Angular?",
+      "options": [
+        "To inject dependencies between components",
+        "To provide external dependencies to a component",
+        "To inject services into components",
+        "All of the above"
+      ],
+      "correctOption": 3,
+      "points": 10
+    },
+    {
+      "question": "Which command is used to start the Angular development server?",
+      "options": ["ng start", "ng serve", "ng run", "ng develop"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "What is the file extension for Angular component templates?",
+      "options": [".html", ".ts", ".css", ".js"],
+      "correctOption": 0,
+      "points": 10
+    },
+    {
+      "question": "What is the purpose of the Router module in Angular?",
+      "options": [
+        "To handle HTTP requests",
+        "To manage application navigation and routing",
+        "To provide dependency injection",
+        "To handle form submissions"
+      ],
+      "correctOption": 1,
+      "points": 10
+    }
+  ]
+}

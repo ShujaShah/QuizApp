@@ -1,5 +1,5 @@
-import { useEffect, useReducer } from 'react';
-
+// Inside App.js
+import React, { useEffect, useReducer, useState } from 'react';
 import DateCounter from './components/DateCounter';
 import Header from './components/Header';
 import Main from './components/Main';
@@ -12,14 +12,16 @@ import Progress from './components/Progress';
 import FinishScreen from './components/FinishScreen';
 import Footer from './components/Footer';
 import Timer from './components/Timer';
-import questionsDataReact from '../data/questions.json';
+import questionsDataReact from '../data/questionsReact.json';
+import questionsDataAngular from '../data/questionsAngular.json'; // Import Angular questions
+import questionsDataVue from '../data/questionsVue.json';
+import Home from './components/Home'; // Import Homepage component
 
 const SECS_PER_QUESTION = 30;
 const initialState = {
-  // questions: [],
-  questions: questionsDataReact.questions,
-  status: 'ready', //status can be loading, error, ready, active, finished, initially it will be loading if we are fetching data
-  index: 0, // used to take the certain question from the questions array
+  questions: [],
+  status: 'ready',
+  index: 0,
   answer: null,
   points: 0,
   highscore: 0,
@@ -39,7 +41,7 @@ function reducer(state, action) {
         secondsRemaining: state.questions.length * SECS_PER_QUESTION,
       };
     case 'newAnswer':
-      const question = state.questions.at(state.index);
+      const question = state.questions[state.index];
       return {
         ...state,
         answer: action.payload,
@@ -69,6 +71,8 @@ function reducer(state, action) {
         secondsRemaining: state.secondsRemaining - 1,
         status: state.secondsRemaining === 0 ? 'finished' : state.status,
       };
+    case 'selectQuiz':
+      return { ...state, selectedQuiz: action.payload }; // Store selected quiz in state
     default:
       throw new Error('Action is unknown');
   }
@@ -79,13 +83,24 @@ export default function App() {
     { questions, status, index, answer, points, highscore, secondsRemaining },
     dispatch,
   ] = useReducer(reducer, initialState);
+  const [selectedQuiz, setSelectedQuiz] = useState(null); // State to store selected quiz
 
-  const numQuestions = questions.length;
-
-  const maxPossiblePoints = questions.reduce(
-    (prev, cur) => prev + cur.points,
-    0
-  );
+  useEffect(() => {
+    // Fetch questions based on selectedQuiz
+    if (selectedQuiz === 'React') {
+      dispatch({ type: 'dataReceived', payload: questionsDataReact.questions });
+    } else if (selectedQuiz === 'Angular') {
+      dispatch({
+        type: 'dataReceived',
+        payload: questionsDataAngular.questions,
+      });
+    } else if (selectedQuiz === 'Vue') {
+      dispatch({
+        type: 'dataReceived',
+        payload: questionsDataVue.questions,
+      });
+    }
+  }, [selectedQuiz]);
 
   //creating a fake server
   // useEffect(() => {
@@ -99,44 +114,66 @@ export default function App() {
     <div className="app">
       <Header />
       <Main>
-        {status === 'loading' && <Loader />}
-        {status === 'error' && <Error />}
-        {status === 'ready' && (
-          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
+        {!selectedQuiz && (
+          <Home onSelectQuiz={(quiz) => setSelectedQuiz(quiz)} />
         )}
-        {status === 'active' && (
+        {/* Render quiz components if selectedQuiz is set */}
+        {selectedQuiz && (
           <>
-            <Progress
-              index={index}
-              numQuestions={numQuestions}
-              points={points}
-              maxPossiblePoints={maxPossiblePoints}
-              answer={answer}
-            />
-            <Question
-              question={questions[index]}
-              dispatch={dispatch}
-              answer={answer}
-              points={points}
-            />
-            <Footer>
-              <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
-              <NextButton
+            {status === 'loading' && <Loader />}
+            {status === 'error' && <Error />}
+            {status === 'ready' && (
+              <StartScreen
+                title={selectedQuiz}
+                numQuestions={questions.length}
                 dispatch={dispatch}
-                answer={answer}
-                numQuestions={numQuestions}
-                index={index}
+                selectedQuiz={selectedQuiz} // Pass selectedQuiz to StartScreen
               />
-            </Footer>
+            )}
+            {status === 'active' && (
+              <>
+                <Progress
+                  index={index}
+                  numQuestions={questions.length}
+                  points={points}
+                  maxPossiblePoints={questions.reduce(
+                    (prev, cur) => prev + cur.points,
+                    0
+                  )}
+                  answer={answer}
+                />
+                <Question
+                  question={questions[index]}
+                  dispatch={dispatch}
+                  answer={answer}
+                  points={points}
+                />
+                <Footer>
+                  <Timer
+                    dispatch={dispatch}
+                    secondsRemaining={secondsRemaining}
+                  />
+                  <NextButton
+                    dispatch={dispatch}
+                    answer={answer}
+                    numQuestions={questions.length}
+                    index={index}
+                  />
+                </Footer>
+              </>
+            )}
+            {status === 'finished' && (
+              <FinishScreen
+                points={points}
+                maxPossiblePoints={questions.reduce(
+                  (prev, cur) => prev + cur.points,
+                  0
+                )}
+                highscore={highscore}
+                dispatch={dispatch}
+              />
+            )}
           </>
-        )}
-        {status === 'finished' && (
-          <FinishScreen
-            points={points}
-            maxPossiblePoints={maxPossiblePoints}
-            highscore={highscore}
-            dispatch={dispatch}
-          />
         )}
       </Main>
     </div>

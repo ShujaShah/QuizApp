@@ -1,8 +1,11 @@
 function Header() {
+  function handleClick() {
+    window.location.reload();
+  }
   return (
-    <header className='app-header'>
-      <img src='logo512.png' alt='React logo' />
-      <h1>The React Quiz</h1>
+    <header className="app-header" onClick={handleClick}>
+      <img src="quiz-logo.png" alt="logo" />
+      <h1>Take Quiz</h1>
     </header>
   );
 }

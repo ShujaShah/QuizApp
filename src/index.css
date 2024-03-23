@@ -40,7 +40,7 @@ body {
 }
 
 .app-header {
-  width: 66rem;
+  width: 50rem;
   margin-bottom: 4rem;
   display: flex;
   align-items: center;
@@ -255,4 +255,46 @@ progress {
 .counter * {
   font-size: inherit;
   padding: 0.8rem;
+}
+
+.homepage {
+  display: flex;
+  justify-content: center; /* Horizontally center the cards */
+}
+
+.quiz-card {
+  margin-top: 10rem;
+  margin-right: 4rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+}
+
+.quiz-card h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.quiz-card p {
+  font-size: 18px;
+  color: #666666;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.frontier-text {
+  margin-top: 4rem;
+  font-size: 16px;
+  text-align: center;
 }
