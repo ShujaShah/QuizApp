@@ -12,12 +12,12 @@ import Progress from './components/Progress';
 import FinishScreen from './components/FinishScreen';
 import Footer from './components/Footer';
 import Timer from './components/Timer';
-import questionsData from '../data/questions.json';
+import questionsDataReact from '../data/questions.json';
 
 const SECS_PER_QUESTION = 30;
 const initialState = {
   // questions: [],
-  questions: questionsData.questions,
+  questions: questionsDataReact.questions,
   status: 'ready', //status can be loading, error, ready, active, finished, initially it will be loading if we are fetching data
   index: 0, // used to take the certain question from the questions array
   answer: null,
