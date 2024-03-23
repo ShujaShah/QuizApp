@@ -12,11 +12,13 @@ import Progress from './components/Progress';
 import FinishScreen from './components/FinishScreen';
 import Footer from './components/Footer';
 import Timer from './components/Timer';
+import questionsData from '../data/questions.json';
 
 const SECS_PER_QUESTION = 30;
 const initialState = {
-  questions: [],
-  status: 'loading', //status can be loading, error, ready, active, finished
+  // questions: [],
+  questions: questionsData.questions,
+  status: 'ready', //status can be loading, error, ready, active, finished, initially it will be loading if we are fetching data
   index: 0, // used to take the certain question from the questions array
   answer: null,
   points: 0,
@@ -85,12 +87,13 @@ export default function App() {
     0
   );
 
-  useEffect(() => {
-    fetch('http://localhost:8000/questions')
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: 'dataReceived', payload: data }))
-      .catch((err) => dispatch({ type: 'dataFailed' }));
-  }, []);
+  //creating a fake server
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/questions')
+  //     .then((res) => res.json())
+  //     .then((data) => dispatch({ type: 'dataReceived', payload: data }))
+  //     .catch((err) => dispatch({ type: 'dataFailed' }));
+  // }, []);
 
   return (
     <div className="app">
