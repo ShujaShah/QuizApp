@@ -5,12 +5,14 @@ import Main from './components/Main';
 import Loader from './components/Loader';
 import Error from './components/Error';
 import StartScreen from './components/StartScreen';
-import Questions from './components/Questions';
+import Question from './components/Question';
 
 const initialState = {
   questions: [],
   status: 'loading', //status can be loading, error, ready, active, finished
   index: 0, // used to take the certain question from the questions array
+  answer: null,
+  points: 0,
 };
 
 function reducer(state, action) {
@@ -21,13 +23,23 @@ function reducer(state, action) {
       return { ...state, status: 'error' };
     case 'start':
       return { ...state, status: 'active' };
+    case 'newAnswer':
+      const question = state.questions.at(state.index);
+      return {
+        ...state,
+        answer: action.payload,
+        points:
+          action.payload === question.correctOption
+            ? state.points + question.points
+            : state.points,
+      };
     default:
       throw new Error('Action is unknown');
   }
 }
 
 export default function App() {
-  const [{ questions, status, index }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -50,7 +62,14 @@ export default function App() {
         {status === 'ready' && (
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
-        {status === 'active' && <Questions question={questions[index]} />}
+        {status === 'active' && (
+          <Question
+            question={questions[index]}
+            dispatch={dispatch}
+            answer={answer}
+            points={points}
+          />
+        )}
       </Main>
     </div>
   );
