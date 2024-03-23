@@ -9,8 +9,8 @@ import Questions from './components/Questions';
 
 const initialState = {
   questions: [],
-  //status can be loading, error, ready, active, finished
-  status: 'loading',
+  status: 'loading', //status can be loading, error, ready, active, finished
+  index: 0, // used to take the certain question from the questions array
 };
 
 function reducer(state, action) {
@@ -27,7 +27,10 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   const numQuestions = questions.length;
 
@@ -47,7 +50,7 @@ export default function App() {
         {status === 'ready' && (
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
-        {status === 'active' && <Questions />}
+        {status === 'active' && <Questions question={questions[index]} />}
       </Main>
     </div>
   );
